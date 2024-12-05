@@ -182,3 +182,98 @@
   justify-content: center;
   align-items: center;
 }
+
+/* RESPONSIVE DESIGN */
+/* DESKTOP */
+@media (max-width: 1536px) {
+  .hTitle {
+    font-size: 72px;
+  }
+}
+
+/* LAPTOP */
+@media (max-width: 1280px) {
+  .bg {
+    height: 60%;
+    top: auto;
+    bottom: 0;
+  }
+
+  .hImg {
+    height: 100%;
+  }
+
+  .hTitle {
+    font-size: 88px;
+  }
+
+  .awards {
+    width: 60%;
+  }
+
+  .bubbleContainer {
+    width: 100%;
+  }
+}
+
+/* TABLET */
+@media (max-width: 1024px) {
+  .bg {
+    height: 50%;
+  }
+
+  .hTitle {
+    font-size: 72px;
+  }
+
+  .bubbleContainer {
+    width: 100%;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+  }
+
+  .bg {
+    height: 60%;
+  }
+
+  .hSection {
+    width: 100%;
+  }
+
+  .hSection.left {
+    align-items: center;
+    text-align: center;
+    gap: 2.2em;
+  }
+
+  .hTitle {
+    font-size: 3em;
+  }
+
+  .bubbleContainer {
+    width: 100%;
+  }
+
+  .awards {
+    width: 100%;
+  }
+
+  .awardLists {
+    justify-content: center;
+  }
+
+  .hSection.right {
+    justify-content: end;
+  }
+
+  .follow,
+  .bubbleContainer,
+  .certificate {
+    display: none;
+  }
+}

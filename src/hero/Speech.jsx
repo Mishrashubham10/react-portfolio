@@ -1,8 +1,15 @@
 import { TypeAnimation } from 'react-type-animation';
 
+// MOTION ANIMATION
+import { motion } from 'motion/react';
+
 export default function Speech() {
   return (
-    <div className="bubbleContainer">
+    <motion.div
+      className="bubbleContainer"
+      animate={{ opacity: [0, 1] }}
+      transition={{ duration: 1 }}
+    >
       <div className="bubble">
         <TypeAnimation
           sequence={[
@@ -19,6 +26,6 @@ export default function Speech() {
         />
       </div>
       <img src="/man.png" alt="man" />
-    </div>
+    </motion.div>
   );
 }

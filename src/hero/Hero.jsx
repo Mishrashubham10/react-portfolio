@@ -1,27 +1,97 @@
 import './hero.css';
 import Speech from './Speech';
 
+// MOTION PACKAGE
+import { motion } from 'motion/react';
+import { animate, easeInOut } from 'motion';
+import { Canvas } from '@react-three/fiber';
+import Shape from './Shape';
+import { Suspense } from 'react';
+
+const awardVariants = {
+  initial: {
+    x: -100,
+    opacity: 0,
+  },
+  animate: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 1,
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const followVariants = {
+  initial: {
+    y: -100,
+    opacity: 0,
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 1,
+      staggerChildren: 0.2,
+    },
+  },
+};
+
 export default function Hero() {
   return (
     <div className="hero">
       <div className="hSection left">
         {/* LEFT */}
-        <h1 className="hTitle">
+        <motion.h1
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="hTitle"
+        >
           Hey There, <br />
           <span>I'm Shubham</span>
-        </h1>
+        </motion.h1>
         {/* AWARDS */}
-        <div className="awards">
-          <h2>Top Rated Designer</h2>
-          <p>Lorem ipsum dolor sit amet consectetur.</p>
-          <div className="awardLists">
-            <img src="/award1.png" alt="Awards" />
-            <img src="/award2.png" alt="Awards" />
-            <img src="/award3.png" alt="Awards" />
-          </div>
-        </div>
+        <motion.div
+          variants={awardVariants}
+          initial="initial"
+          animate="animate"
+          className="awards"
+        >
+          <motion.h2 variants={awardVariants}>Top Rated Designer</motion.h2>
+          <motion.p variants={awardVariants}>
+            Lorem ipsum dolor sit amet consectetur.
+          </motion.p>
+          <motion.div variants={awardVariants} className="awardLists">
+            <motion.img
+              variants={awardVariants}
+              src="/award1.png"
+              alt="Awards"
+            />
+            <motion.img
+              variants={awardVariants}
+              src="/award2.png"
+              alt="Awards"
+            />
+            <motion.img
+              variants={awardVariants}
+              src="/award3.png"
+              alt="Awards"
+            />
+          </motion.div>
+        </motion.div>
         {/* SCROLL SVG */}
-        <a href="#services" className="scroll">
+        <motion.a
+          animate={{ y: [0, 5], opacity: [0, 1, 0] }}
+          transition={{
+            repeat: Infinity,
+            duration: 4,
+            ease: 'easeInOut',
+          }}
+          href="#services"
+          className="scroll"
+        >
           <svg
             width="50px"
             height="50px"
@@ -34,36 +104,51 @@ export default function Hero() {
               stroke="white"
               strokeWidth="1"
             />
-            <path
+            <motion.path
+              animate={{ y: [0, 5] }}
+              transition={{
+                repeat: Infinity,
+                duration: 4,
+                ease: 'easeInOut',
+              }}
               d="M12 5V8"
               stroke="white"
               strokeWidth="1"
               strokeLinecap="round"
             />
           </svg>
-        </a>
+        </motion.a>
       </div>
       {/* RIGHT */}
       <div className="hSection right">
         {/* FOLLOW */}
-        <div className="follow">
-          <a href="/">
+        <motion.div
+          variants={followVariants}
+          initial="initial"
+          animate="animate"
+          className="follow"
+        >
+          <motion.a variants={followVariants} href="/">
             <img src="/instagram.png" alt="logo" />
-          </a>
-          <a href="/">
+          </motion.a>
+          <motion.a variants={followVariants} href="/">
             <img src="/facebook.png" alt="logo" />
-          </a>
-          <a href="/">
+          </motion.a>
+          <motion.a variants={followVariants} href="/">
             <img src="/youtube.png" alt="logo" />
-          </a>
-          <div className="followTextContainer">
+          </motion.a>
+          <motion.div variants={followVariants} className="followTextContainer">
             <h3 className="followText">FOLLOW ME</h3>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
         {/* BUBBLE */}
         <Speech />
         {/* CERTIFICATE */}
-        <div className="certificate">
+        <motion.div
+          animate={{ opacity: [0, 1] }}
+          transition={{ duration: 1 }}
+          className="certificate"
+        >
           <img src="/certificate.png" alt="certificate" />
           <p>
             SHUBH CERTIFIED <br />
@@ -71,10 +156,19 @@ export default function Hero() {
             <br />
             UI DESIGNER
           </p>
-        </div>
+        </motion.div>
         {/* CONTACT BUTTON */}
-        <a href="#contact" className="contactLink">
-          <div className="contactButton">
+        <motion.a
+          animate={{ x: [200, 0], opacity: [0, 1] }}
+          transition={{ duration: 2 }}
+          href="#contact"
+          className="contactLink"
+        >
+          <motion.div
+            animate={{ rotate: [0, 360] }}
+            transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+            className="contactButton"
+          >
             <svg viewBox="0 0 200 200" width="150" height="150">
               <circle cx="100" cy="100" r="90" fill="pink" />
               <path
@@ -105,11 +199,16 @@ export default function Hero() {
                 <polyline points="9 6 18 6 18 15" />
               </svg>
             </div>
-          </div>
-        </a>
+          </motion.div>
+        </motion.a>
       </div>
       <div className="bg">
         {/* 3D SHAPE */}
+        <Canvas>
+          <Suspense fallback="loading...">
+            <Shape />
+          </Suspense>
+        </Canvas>
         <div className="hImg">
           <img src="/hero.png" alt="Profile Image" />
         </div>
